@@ -1,0 +1,26 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem        1.0
+
+name              opencore-amr
+version           0.1.2
+revision          1
+categories        audio
+platforms         darwin
+maintainers       dropio.com:lee
+
+description       Adaptive Multi Rate Narrowband and Wideband speech codec
+long_description  Library of OpenCORE Framework implementation of \
+  Adaptive Multi Rate Narrowband and Wideband speech codec.
+
+homepage          http://opencore-amr.sourceforge.net/
+master_sites      sourceforge:opencore-amr
+
+depends_lib       port:gmake
+
+checksums         md5 8e8b8b253eb046340ff7b6bf7a6ccd3e \
+                  sha1 289478d49701213255e9d63a93aae9ad472125cc \
+                  rmd160 f23f7e9eabb3c6d046d67572a6a25e09b8dc2988
+
+configure.args      --mandir=${prefix}/share/man
