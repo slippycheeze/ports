@@ -1,0 +1,45 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+
+PortSystem 1.0
+
+name                rtmpdump
+version             2.4
+categories          www net
+platforms           darwin
+license             GPL-2+
+
+depends_lib         port:openssl
+
+maintainers         rimspace.net:daniel
+description         a tool for downloading RTMP streaming media
+long_description    A small dumper for media content streamed over \
+                    the RTMP protocol. Supplying an rtmp url will result \
+                    in a dumped flv file, which can be played or transcoded \
+                    using ffmpeg/mplayer, etc.
+
+homepage            http://rtmpdump.mplayerhq.hu/
+fetch.type          git
+git.url             git://git.ffmpeg.org/rtmpdump
+git.branch          HEAD
+
+depends_build-append    port:git-core
+
+patchfiles          patch-Makefile.diff \
+                    patch-librtmp-Makefile.diff
+
+use_configure       no
+
+variant universal {}
+if {[variant_isset universal]} {
+    set archflags ${configure.universal_cflags}
+} else {
+    set archflags ${configure.cc_archflags}
+}
+
+build.target        SYS=darwin
+build.cmd           make -C librtmp "${build.target}" && make "${build.target}"
+build.args          prefix="${prefix}" CC="${configure.cc} ${archflags}"
+build.pre_args-delete -w
+
+destroot.args       prefix="${prefix}"

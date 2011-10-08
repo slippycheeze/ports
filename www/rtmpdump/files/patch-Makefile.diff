@@ -1,0 +1,28 @@
+diff --git Makefile Makefile
+index 6ef5742..bda1682 100644
+--- Makefile
++++ Makefile
+@@ -1,4 +1,4 @@
+-VERSION=v2.4
++VERSION=2.4
+ 
+ prefix=/usr/local
+ 
+@@ -26,7 +26,7 @@ LDFLAGS=-Wall $(XLDFLAGS)
+ 
+ bindir=$(prefix)/bin
+ sbindir=$(prefix)/sbin
+-mandir=$(prefix)/man
++mandir=$(prefix)/share/man
+ 
+ BINDIR=$(DESTDIR)$(bindir)
+ SBINDIR=$(DESTDIR)$(sbindir)
+@@ -73,7 +73,7 @@ clean:
+ FORCE:
+ 
+ $(LIBRTMP): FORCE
+-	@cd librtmp; $(MAKE) all
++	@cd librtmp; $(MAKE) all SYS=$(SYS)
+ 
+ rtmpdump: rtmpdump.o
+ 	$(CC) $(LDFLAGS) -o $@$(EXT) $@.o $(LIBS)

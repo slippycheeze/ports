@@ -1,0 +1,18 @@
+diff --git librtmp/Makefile librtmp/Makefile
+index a0125f1..793c0e6 100644
+--- librtmp/Makefile
++++ librtmp/Makefile
+@@ -1,11 +1,11 @@
+ VERSION=v2.4
+ 
+-prefix=/usr/local
++prefix=/opt/local
+ 
+ incdir=$(prefix)/include/librtmp
+ bindir=$(prefix)/bin
+ libdir=$(prefix)/lib
+-mandir=$(prefix)/man
++mandir=$(prefix)/share/man
+ BINDIR=$(DESTDIR)$(bindir)
+ INCDIR=$(DESTDIR)$(incdir)
+ LIBDIR=$(DESTDIR)$(libdir)
