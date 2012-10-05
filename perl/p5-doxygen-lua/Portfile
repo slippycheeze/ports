@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Doxygen-Lua 0.02
+#perl5.setup         Doxygen-Lua 0.02 ../by-authors/id/A/AL/ALEC
+platforms           darwin
+maintainers         nomaintainer
+# Uncomment this line if you know there will be no arch-specific code:
+#supported_archs     noarch
+
+description         Doxygen::Lua (no description available)
+
+long_description    ${description}
+
+checksums           sha256 a9057b04a1ac4621088a004f1ee6721d59e29b6d2df0d23a5d003cca162bcb6b \
+                    rmd160 148183271334e05d248fc36724088dca23ceb707
+
+depends_lib-append  port:p5-moose
+
+

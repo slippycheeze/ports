@@ -1,0 +1,54 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem 1.0
+name		qcachegrind
+version		0.7.1
+#revision	1
+categories	devel
+maintainers	frederic.devernay@m4x.org
+description	Callgrind profile data visualization
+
+long_description	${description}
+
+homepage	http://kcachegrind.sourceforge.net/
+checksums           md5     39376990a9ea2e9f1b75f43f9104fd70 \
+                    sha1    efa0b3abb7afe211c2f227b78a8699d80846f8ea \
+                    rmd160  5f03317e354e1d9f924983a7890abdcbc0423233
+master_sites	http://kcachegrind.sourceforge.net/
+distname kcachegrind-${version}
+extract.suffix  .tgz
+
+#depends_build \
+#    port:texinfo
+depends_lib \
+    port:qt4-mac
+
+universal_variant   no
+
+destroot {
+    copy ${worksrcpath}/qcachegrind/qcachegrind.app ${destroot}${applications_dir}
+}
+
+variant qt4nokia description {Use the official Qt4 distribution from http://qt.nokia.com/download} {}
+
+# move setting of 'qt_qmake_cmd' outside variants, since 'if'
+# statements are processed in-order while variants are processed after
+# everything else.
+set qt_qmake_cmd ""
+if {[variant_isset qt4nokia]} {
+	set qt_qmake_cmd    "/usr/bin/qmake -spec macx-g++"
+    depends_lib-delete      port:qt4-mac
+	pre-configure {
+		if {![file exists "/Library/Frameworks/QtOpenGL.framework/Headers/QtOpenGL"]} {
+			return -code error "\n********************\n${name} requires Qt for Mac, please download and install it from http://qt.nokia.com/download\n********************"
+		}
+	}
+} else {
+    PortGroup           qt4 1.0
+}
+
+configure.cmd       ${qt_qmake_cmd}
+configure.pre_args  INSTALLBASE="${prefix}"
+
+livecheck.type  none
